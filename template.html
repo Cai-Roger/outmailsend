@@ -10,10 +10,10 @@
       padding: 20px;
     }
     .header {
-      background-color: #f4f6f9;
-      padding: 20px;
-      border-left: 6px solid #3498db;
-      margin-bottom: 20px;
+      background-color: #ce7eca;
+      padding: 14px;
+      border-left: 6px solid #009985;
+      margin-bottom: 14px;
     }
     .content {
       font-size: 16px;
@@ -28,7 +28,7 @@
   </style>
 </head>
 <body>
-  <div class="title">
+  <div class="header">
     <h1>Hi {{receiver}}，您有新的Issue Assign {{sidno}}</h1>
   </div>
   <div class="content">
@@ -41,11 +41,11 @@
   <p>{{line7}}</p>
   <p>{{line8}}</p>
   <p>{{line9}}</p>
-  <p><b>發送時間：</b> {{current_time}}</p>
+  <p><span style="font-size:14px"><b>發送時間：</b> {{now_time}}</span></p>
 </div>
   <div class="footer">
+    <span style="color:red">若Issue已解除則無須理會此郵件。</span><br>
     本郵件由系統自動發出，請勿直接回覆。<br>
-    若Issue已解除則無須理會此郵件。<br>
     Developed by Roger with GTP 技術支援。
   </div>
 </body>
