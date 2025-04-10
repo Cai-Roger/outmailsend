@@ -27,7 +27,7 @@ def send_mail(req: MailRequest):
         msg["From"] = EMAIL_USER
         msg["To"] = req.to
         msg["Subject"] = req.subject
-        msg["content"](req.content)  # 純文字內容
+        msg["content"] = req.content  # 純文字內容
 
         # 發送郵件（Outlook）
         with smtplib.SMTP("smtp.office365.com", 587) as smtp:
