@@ -7,8 +7,8 @@ from email.message import EmailMessage
 
 load_dotenv()
 
-EMAIL_USER = os.getenv("EMAIL_USER")
-EMAIL_PASS = os.getenv("EMAIL_PASS")
+EMAIL_USER = os.getenv("roger.cai@hand-global.com")
+EMAIL_PASS = os.getenv("Whf890226")
 
 app = FastAPI()
 
