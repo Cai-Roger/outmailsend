@@ -5,38 +5,31 @@ import os
 import smtplib
 from email.message import EmailMessage
 
+# 載入 .env 檔案中的環境變數
 load_dotenv()
 
-EMAIL_USER = os.getenv("roger.cai@hand-global.com")
-EMAIL_PASS = os.getenv("Whf890226")
+EMAIL_USER = os.getenv("EMAIL_USER")
+EMAIL_PASS = os.getenv("EMAIL_PASS")
 
 app = FastAPI()
 
+# 請求格式：只包含 to, subject, content
 class MailRequest(BaseModel):
     to: str
     subject: str
     content: str
-    cc: str = None
-    bcc: str = None
-    is_html: bool = False
 
 @app.post("/send-mail")
 def send_mail(req: MailRequest):
     try:
-msg["From"] = EMAIL_USER
-msg["To"] = req.to
-msg["Subject"] = req.subject
+        # 建立 EmailMessage 物件
+        msg = EmailMessage()
+        msg["From"] = EMAIL_USER
+        msg["To"] = req.to
+        msg["Subject"] = req.subject
+        msg.set_content(req.content)  # 純文字內容
 
-if req.cc:
-    msg["Cc"] = req.cc
-if req.bcc:
-    msg["Bcc"] = req.bcc
-
-if req.is_html:
-    msg.add_alternative(req.content, subtype='html')
-else:
-    msg.set_content(req.content)
-
+        # 發送郵件（Outlook）
         with smtplib.SMTP("smtp.office365.com", 587) as smtp:
             smtp.starttls()
             smtp.login(EMAIL_USER, EMAIL_PASS)
