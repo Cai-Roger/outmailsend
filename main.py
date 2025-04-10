@@ -10,6 +10,9 @@ load_dotenv()
 EMAIL_USER = os.getenv("EMAIL_USER")
 EMAIL_PASS = os.getenv("EMAIL_PASS")
 
+print("📧 EMAIL_USER:", EMAIL_USER)
+print("🔐 EMAIL_PASS:", "已讀取" if EMAIL_PASS else "❌ 缺失")
+
 app = FastAPI()
 
 class MailRequest(BaseModel):
@@ -18,12 +21,13 @@ class MailRequest(BaseModel):
     content: str
 
 @app.get("/")
-def home():
-    return {"message": "SendMail API is live! Try POST /send-mail 🎯"}
+def root():
+    return {"message": "SendMail API is up. Try POST /send-mail"}
 
 @app.post("/send-mail")
 def send_mail(req: MailRequest):
     try:
+        print("📨 收到寄信請求:", req.dict())
         msg = EmailMessage()
         msg["From"] = EMAIL_USER
         msg["To"] = req.to
@@ -35,6 +39,8 @@ def send_mail(req: MailRequest):
             smtp.login(EMAIL_USER, EMAIL_PASS)
             smtp.send_message(msg)
 
+        print("✅ 郵件已成功發送")
         return {"message": "Outlook mail sent successfully!"}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        print("❌ 發信失敗:", str(e))
+        raise HTTPException(status_code=500, detail=f"寄信失敗：{str(e)}")
