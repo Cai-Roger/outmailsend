@@ -23,11 +23,19 @@ class MailRequest(BaseModel):
 @app.post("/send-mail")
 def send_mail(req: MailRequest):
     try:
-        msg = EmailMessage()
-        msg["From"] = EMAIL_USER
-        msg["To"] = req.to
-        msg["Subject"] = req.subject
-        msg.set_content(req.content)
+msg["From"] = EMAIL_USER
+msg["To"] = req.to
+msg["Subject"] = req.subject
+
+if req.cc:
+    msg["Cc"] = req.cc
+if req.bcc:
+    msg["Bcc"] = req.bcc
+
+if req.is_html:
+    msg.add_alternative(req.content, subtype='html')
+else:
+    msg.set_content(req.content)
 
         with smtplib.SMTP("smtp.office365.com", 587) as smtp:
             smtp.starttls()
