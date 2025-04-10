@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+      color: #2c3e50;
+      line-height: 1.6;
+      padding: 20px;
+    }
+    .header {
+      background-color: #f4f6f9;
+      padding: 20px;
+      border-left: 6px solid #3498db;
+      margin-bottom: 20px;
+    }
+    .content {
+      font-size: 16px;
+    }
+    .footer {
+      font-size: 13px;
+      color: #7f8c8d;
+      border-top: 1px solid #ccc;
+      margin-top: 30px;
+      padding-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h2>Hi {{receiver}}，這是你的自動寄信系統！</h2>
+  </div>
+  <div class="content">
+    <p>{{body}}</p>
+    <p><b>發送時間：</b> {{current_time}}</p>
+  </div>
+  <div class="footer">
+    本郵件由系統自動發出，請勿直接回覆。<br>
+    Developed by David with GPT 技術支援。
+  </div>
+</body>
+</html>
