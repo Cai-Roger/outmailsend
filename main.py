@@ -34,7 +34,7 @@ def send_mail(req: MailRequest):
         msg["Subject"] = req.subject
         msg.set_content(req.content)
 
-        with smtplib.SMTP("smtp.office365.com", 587) as smtp:
+        with smtplib.SMTP("smtp.gmail.com", 587) as smtp:
             smtp.starttls()
             smtp.login(EMAIL_USER, EMAIL_PASS)
             smtp.send_message(msg)
