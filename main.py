@@ -16,6 +16,9 @@ class MailRequest(BaseModel):
     to: str
     subject: str
     content: str
+    cc: str = None
+    bcc: str = None
+    is_html: bool = False
 
 @app.post("/send-mail")
 def send_mail(req: MailRequest):
