@@ -18,6 +18,7 @@ app = FastAPI()
 
 class MailRequest(BaseModel):
     to: str
+    bcc: str
     subject: str
     content: str = ""
     is_html: bool = False
@@ -32,6 +33,7 @@ def send_mail(req: MailRequest):
         msg = EmailMessage()
         msg["From"] = EMAIL_USER
         msg["To"] = req.to
+        msg["Bcc"] = req.bcc
         msg["Subject"] = req.subject
 
         if req.template:
