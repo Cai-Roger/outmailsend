@@ -31,7 +31,7 @@ def send_mail(req: MailRequest):
         print("📨 收到寄信請求:", req.dict())
 
         msg = EmailMessage()
-        msg["From"] = f"系統管理員_Issue管理室 <{EMAIL_USER}>"
+        msg["From"] = f"系統管理員_Issue管理小組 <{EMAIL_USER}>"
         msg["To"] = req.to
         msg["Bcc"] = req.bcc
         msg["Subject"] = req.subject
